@@ -1,32 +1,40 @@
 public class Auto {
-	public double kilometerstand;
+	private double kilometerstand;
 
-	public double tankinhalt;
+	private double tankinhalt;
 
-	public double maxTankVolumen;
+	private final double maxTankVolumen;
 
-	public double verbrauchProKm;
+	private final double verbrauchProKm;
 
-	public double profiltiefeReifen;
+	private double profiltiefeReifen;
 
-	public double profiltiefeNeuerReifen = 0.8;
+	private double profiltiefeNeuerReifen = 0.8;
 
-	public double minimalErlaubteProfiltiefe = 0.3;
+	private double minimalErlaubteProfiltiefe = 0.3;
 
-	public double reifenabnutzungProKm = 0.00025;
+	private double reifenabnutzungProKm = 0.00025;
+	
+	private final int fahrgestellnummer;
+	
+	private static int letztefgn = 0;
 
-	public String wagenname;
+	private String wagenname;
 
-	public Person fahrer;
+	private Person fahrer;
 
 	public Auto(double maxTankVolumen, double verbrauchProKm, String wagenname) {
 		this.maxTankVolumen = maxTankVolumen;
 		this.verbrauchProKm = verbrauchProKm;
 		this.wagenname = wagenname;
+		
+		fahrgestellnummer=letztefgn+1;
+		letztefgn=fahrgestellnummer;
 
 		// gleich volltanken und frische Reifen drauf
 		tanken();
 		wechsleReifen();
+		System.out.println(fahrgestellnummer);
 	}
 
 	public Person getFahrer() {
@@ -62,7 +70,7 @@ public class Auto {
 
 	}
 
-	public double bestimmeReichweite() {
+	private double bestimmeReichweite() {
 		// Reichweite des Tanks bestimmen
 		double reichweiteTank = tankinhalt / getBenzinverbrauchProKm();
 
@@ -78,7 +86,7 @@ public class Auto {
 		}
 	}
 
-	public double getReifenAbnutzungProKm() {
+	private double getReifenAbnutzungProKm() {
 		// Diese Methode bestimmt, wie stark die Reifenabnutzung pro Km
 		// waere, wenn das Auto jetzt fahren wuerde
 		if (!isFahrerOk()) {
@@ -93,7 +101,7 @@ public class Auto {
 		return reifenabnutzungProKm;
 	}
 
-	public double getBenzinverbrauchProKm() {
+	private double getBenzinverbrauchProKm() {
 		// Diese Methode bestimmt, wie stark der Benzinverbrauch pro Km
 		// waere, wenn das Auto jetzt fahren wuerde
 		if (!isFahrerOk()) {
@@ -108,7 +116,7 @@ public class Auto {
 		return verbrauchProKm;
 	}
 
-	public boolean isFahrerOk() {
+	private boolean isFahrerOk() {
 		// Ohne Fahrer laeuft hier gar nichts
 		if (fahrer == null) {
 			return false;
@@ -141,6 +149,7 @@ public class Auto {
 
 	}
 
+	
 	public void tanken(double liter) {
 		// Zuviel getankt?
 		if (liter + tankinhalt > maxTankVolumen) {
@@ -149,11 +158,15 @@ public class Auto {
 		} else {
 			// Nein: Tank um die Tankmenge fuellen
 			this.tankinhalt = liter + tankinhalt;
+			
+		
 		}
 	}
 
 	public String getWagenname() {
 		return wagenname;
+		
+		
 	}
 
 }

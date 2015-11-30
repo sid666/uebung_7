@@ -2,7 +2,7 @@ public class TausendMinutenRennen {
 
 	public static void main(String[] args) {
 
-		Auto[] autos = new Auto[5];
+		/*Auto[] autos = new Auto[5];
 
 		autos[0] = new Auto(40, 0.10, "Wagen 1");
 		autos[1] = new Auto(44, 0.11, "Wagen 2");
@@ -87,6 +87,7 @@ public class TausendMinutenRennen {
 		default:
 			double strecke = Zufall.getZufallDouble(3, 4);
 			auto.fahre(strecke);
-		}
+		}*/
+		Auto VW = new Auto(40, 0.10, "Wagen 1");
 	}
 }
